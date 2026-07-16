@@ -12,3 +12,4 @@ env/
 *.sqlite3
 dist/
 build/
+docker-compose.override.yml

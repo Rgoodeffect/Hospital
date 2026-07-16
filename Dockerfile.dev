@@ -1,0 +1,25 @@
+# Fertility Suite - local dev/testing image
+#
+# Identical to Dockerfile, except fertility_suite is fetched from this working
+# tree (via a copy of the repo, .git included) instead of git-cloning
+# https://github.com/rgoodeffect/hospital @ main. Use this while iterating
+# locally or testing a branch that hasn't been merged to main yet - the
+# production Dockerfile intentionally keeps pulling from GitHub.
+
+FROM frappe/erpnext:version-16 AS base
+
+USER root
+
+WORKDIR /home/frappe/frappe-bench
+
+COPY apps.json /home/frappe/frappe-bench/apps.json
+COPY --chown=frappe:frappe . /home/frappe/local-src
+
+USER frappe
+
+RUN bench get-app --skip-assets healthcare https://github.com/frappe/health --branch develop \
+	&& bench get-app --skip-assets fertility_suite /home/frappe/local-src
+
+EXPOSE 8000 9000 6787
+
+CMD ["bench", "start"]

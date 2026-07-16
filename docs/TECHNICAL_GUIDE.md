@@ -6,7 +6,7 @@ Fertility Suite follows the standard Frappe app layout, with one folder per modu
 in `modules.txt`):
 
 ```
-fertility_suite/fertility_suite/
+fertility_suite/
   fertility_case_management/   Fertility Case
   fertility_assessment/        Fertility Assessment
   treatment_planning/          Treatment Plan
