@@ -1,0 +1,23 @@
+[
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Start Assessment"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Start Treatment"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Start IVF"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Confirm Pregnancy"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Close Case"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Cancel"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Submit for Review"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Approve"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Reject"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Activate"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Complete"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Start Stimulation"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Begin Monitoring"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Trigger Ovulation"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Perform Retrieval"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Fertilize"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Proceed to Embryology"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Schedule Transfer"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Await Pregnancy Test"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Complete Cycle"},
+ {"doctype": "Workflow Action Master", "workflow_action_name": "Cancel Cycle"}
+]

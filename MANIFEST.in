@@ -1,0 +1,2 @@
+recursive-include fertility_suite *.css *.csv *.html *.ico *.js *.json *.md *.png *.py *.svg *.txt *.xml *.yml *.yaml
+recursive-exclude fertility_suite *.pyc

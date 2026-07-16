@@ -1,0 +1,165 @@
+{
+ "actions": [],
+ "autoname": "IVF-.YYYY.-.#####",
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fertility_case",
+  "patient",
+  "treatment_plan",
+  "doctor",
+  "column_break_1",
+  "cycle_start_date",
+  "trigger_date",
+  "status",
+  "section_break_notes",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "fertility_case",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Fertility Case",
+   "options": "Fertility Case",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "fertility_case.patient",
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "read_only": 1
+  },
+  {
+   "fieldname": "treatment_plan",
+   "fieldtype": "Link",
+   "label": "Treatment Plan",
+   "options": "Treatment Plan"
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "label": "Doctor",
+   "options": "Healthcare Practitioner",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "cycle_start_date",
+   "fieldtype": "Date",
+   "label": "Cycle Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "trigger_date",
+   "fieldtype": "Date",
+   "label": "Trigger Date"
+  },
+  {
+   "default": "Planned",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Planned\nStimulation\nMonitoring\nTrigger\nRetrieval\nFertilization\nEmbryology\nTransfer\nPregnancy Test\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "IVF Cycle",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "IVF Cycle Management",
+ "name": "IVF Cycle",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fertility Doctor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "IVF Coordinator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Embryologist",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "if_owner": 1,
+   "read": 1,
+   "role": "Fertility Patient"
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

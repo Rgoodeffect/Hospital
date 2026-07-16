@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "autoname": "ET-.YYYY.-.#####",
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ivf_cycle",
+  "patient",
+  "doctor",
+  "transfer_date",
+  "section_break_embryos",
+  "embryos",
+  "section_break_notes",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "ivf_cycle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "IVF Cycle",
+   "options": "IVF Cycle",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "ivf_cycle.patient",
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "read_only": 1
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "label": "Doctor",
+   "options": "Healthcare Practitioner",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "transfer_date",
+   "fieldtype": "Date",
+   "label": "Transfer Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_embryos",
+   "fieldtype": "Section Break",
+   "label": "Embryos Selected For Transfer"
+  },
+  {
+   "fieldname": "embryos",
+   "fieldtype": "Table",
+   "label": "Embryos",
+   "options": "Embryo Transfer Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Embryo Transfer",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Embryo Transfer",
+ "name": "Embryo Transfer",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fertility Doctor",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Embryologist",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "read": 1,
+   "role": "Fertility Patient"
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

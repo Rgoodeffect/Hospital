@@ -1,0 +1,28 @@
+.fertility-status-indicator {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.fertility-status-indicator.status-active {
+	background-color: #d4edda;
+	color: #155724;
+}
+
+.fertility-status-indicator.status-closed {
+	background-color: #e2e3e5;
+	color: #383d41;
+}
+
+.fertility-status-indicator.status-alert {
+	background-color: #f8d7da;
+	color: #721c24;
+}
+
+.embryo-storage-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+	gap: 4px;
+}

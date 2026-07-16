@@ -1,0 +1,18 @@
+[
+	{
+		"url": "https://github.com/frappe/frappe",
+		"branch": "version-16"
+	},
+	{
+		"url": "https://github.com/frappe/erpnext",
+		"branch": "version-16"
+	},
+	{
+		"url": "https://github.com/frappe/health",
+		"branch": "develop"
+	},
+	{
+		"url": "https://github.com/rgoodeffect/hospital",
+		"branch": "main"
+	}
+]

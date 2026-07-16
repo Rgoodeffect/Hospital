@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "kpi_name",
+  "dimension",
+  "snapshot_date",
+  "column_break_1",
+  "period_start",
+  "period_end",
+  "kpi_value"
+ ],
+ "fields": [
+  {
+   "fieldname": "kpi_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "KPI Name",
+   "reqd": 1
+  },
+  {
+   "description": "Optional dimension e.g. doctor name or treatment protocol, for grouped KPIs such as Revenue per Doctor.",
+   "fieldname": "dimension",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Dimension"
+  },
+  {
+   "default": "Today",
+   "fieldname": "snapshot_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Snapshot Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "period_start",
+   "fieldtype": "Date",
+   "label": "Period Start"
+  },
+  {
+   "fieldname": "period_end",
+   "fieldtype": "Date",
+   "label": "Period End"
+  },
+  {
+   "fieldname": "kpi_value",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "KPI Value",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Analytics And KPI Engine",
+ "name": "KPI Snapshot",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Clinic Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Fertility Doctor"
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

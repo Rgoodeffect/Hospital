@@ -1,0 +1,81 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="fertility-portal" id="fertility-portal">
+	<h2>{{ _("Welcome") }}, {{ patient.patient_name }}</h2>
+
+	<ul class="nav nav-tabs" id="fertility-portal-tabs">
+		<li class="active"><a data-tab="treatment-plans" href="#">{{ _("Treatment Plans") }}</a></li>
+		<li><a data-tab="ivf-progress" href="#">{{ _("IVF Progress") }}</a></li>
+		<li><a data-tab="embryo-status" href="#">{{ _("Embryo Status") }}</a></li>
+		<li><a data-tab="insurance-claims" href="#">{{ _("Insurance Claims") }}</a></li>
+	</ul>
+
+	<div id="fertility-portal-content" class="fertility-portal-content">
+		<p class="text-muted">{{ _("Loading...") }}</p>
+	</div>
+</div>
+
+<script>
+frappe.ready(function () {
+	const endpoints = {
+		"treatment-plans": {
+			method: "fertility_suite.api.get_treatment_plans",
+			columns: ["name", "protocol_type", "status", "start_date"],
+		},
+		"ivf-progress": {
+			method: "fertility_suite.api.get_ivf_cycles",
+			columns: ["name", "status", "doctor", "cycle_start_date"],
+		},
+		"embryo-status": {
+			method: "fertility_suite.api.get_embryo_inventory",
+			columns: ["name", "embryo_stage", "embryo_grade", "status"],
+		},
+		"insurance-claims": {
+			method: "fertility_suite.api.get_insurance_claims",
+			columns: ["name", "status", "total_amount", "patient_payable_amount", "claim_date"],
+		},
+	};
+
+	function render_table(rows, columns) {
+		if (!rows.length) {
+			return `<p class="text-muted">${__("No records found.")}</p>`;
+		}
+		let head = columns.map((c) => `<th>${frappe.model.unscrub(c)}</th>`).join("");
+		let body = rows
+			.map((row) => `<tr>${columns.map((c) => `<td>${row[c] != null ? row[c] : ""}</td>`).join("")}</tr>`)
+			.join("");
+		return `<table class="table table-bordered"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+	}
+
+	function load_tab(tab_name) {
+		const config = endpoints[tab_name];
+		const content = document.getElementById("fertility-portal-content");
+		content.innerHTML = `<p class="text-muted">${__("Loading...")}</p>`;
+
+		frappe.call({
+			method: config.method,
+			callback: function (r) {
+				content.innerHTML = render_table(r.message || [], config.columns);
+			},
+		});
+	}
+
+	document.querySelectorAll("#fertility-portal-tabs a").forEach((tab) => {
+		tab.addEventListener("click", function (e) {
+			e.preventDefault();
+			document.querySelectorAll("#fertility-portal-tabs li").forEach((li) => li.classList.remove("active"));
+			this.parentElement.classList.add("active");
+			load_tab(this.dataset.tab);
+		});
+	});
+
+	const path_parts = window.location.pathname.split("/").filter(Boolean);
+	const initial_tab = endpoints[path_parts[path_parts.length - 1]] ? path_parts[path_parts.length - 1] : "treatment-plans";
+	document.querySelectorAll("#fertility-portal-tabs li").forEach((li) => li.classList.remove("active"));
+	const initial_link = document.querySelector(`#fertility-portal-tabs a[data-tab="${initial_tab}"]`);
+	if (initial_link) initial_link.parentElement.classList.add("active");
+	load_tab(initial_tab);
+});
+</script>
+{% endblock %}

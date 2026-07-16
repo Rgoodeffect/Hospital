@@ -1,0 +1,149 @@
+{
+ "actions": [],
+ "autoname": "PA-.YYYY.-.#####",
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "patient",
+  "insurance_plan",
+  "fertility_case",
+  "treatment_plan",
+  "column_break_1",
+  "request_date",
+  "requested_amount",
+  "approved_amount",
+  "status",
+  "section_break_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "insurance_plan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Insurance Plan",
+   "options": "Insurance Plan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fertility_case",
+   "fieldtype": "Link",
+   "label": "Fertility Case",
+   "options": "Fertility Case"
+  },
+  {
+   "fieldname": "treatment_plan",
+   "fieldtype": "Link",
+   "label": "Treatment Plan",
+   "options": "Treatment Plan"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requested_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Requested Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Approved Amount",
+   "read_only": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nSubmitted\nApproved\nRejected\nExpired",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Insurance Management",
+ "name": "Pre Authorization",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Insurance Officer",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fertility Doctor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "read": 1,
+   "role": "Fertility Patient"
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

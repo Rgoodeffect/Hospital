@@ -1,0 +1,125 @@
+version: "3.8"
+
+x-backend-image: &backend-image
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: fertility-suite:latest
+
+x-backend-env: &backend-env
+  environment:
+    - MARIADB_HOST=mariadb
+    - REDIS_CACHE=redis://redis-cache:6379
+    - REDIS_QUEUE=redis://redis-queue:6379
+    - REDIS_SOCKETIO=redis://redis-queue:6379
+    - SOCKETIO_PORT=9000
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-changeit}
+      - MARIADB_AUTO_UPGRADE=1
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --skip-innodb-read-only-compressed
+    volumes:
+      - fertility-mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_ROOT_PASSWORD:-changeit}"]
+      interval: 10s
+      retries: 10
+
+  redis-cache:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    volumes:
+      - fertility-redis-cache-data:/data
+
+  redis-queue:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    volumes:
+      - fertility-redis-queue-data:/data
+
+  configurator:
+    <<: [*backend-image, *backend-env]
+    entrypoint:
+      - bash
+      - -c
+    command:
+      - >
+        wait-for-it -t 120 mariadb:3306;
+        wait-for-it -t 120 redis-cache:6379;
+        wait-for-it -t 120 redis-queue:6379;
+        export APP_LIST="erpnext healthcare fertility_suite";
+        if [ ! -d "sites/${SITE_NAME:-fertility.local}" ]; then
+          bench new-site "${SITE_NAME:-fertility.local}" \
+            --mariadb-root-password "${DB_ROOT_PASSWORD:-changeit}" \
+            --admin-password "${ADMIN_PASSWORD:-changeit}" \
+            --no-mariadb-socket;
+          for app in $$APP_LIST; do bench --site "${SITE_NAME:-fertility.local}" install-app $$app; done;
+        fi;
+    depends_on:
+      - mariadb
+      - redis-cache
+      - redis-queue
+    volumes:
+      - fertility-sites:/home/frappe/frappe-bench/sites
+
+  backend:
+    <<: [*backend-image, *backend-env]
+    restart: unless-stopped
+    volumes:
+      - fertility-sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - configurator
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+
+  websocket:
+    <<: [*backend-image, *backend-env]
+    restart: unless-stopped
+    command: ["node", "apps/frappe/socketio.js"]
+    volumes:
+      - fertility-sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+    ports:
+      - "${WEBSOCKET_PORT:-9000}:9000"
+
+  scheduler:
+    <<: [*backend-image, *backend-env]
+    restart: unless-stopped
+    command: ["bench", "schedule"]
+    volumes:
+      - fertility-sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+
+  queue-short:
+    <<: [*backend-image, *backend-env]
+    restart: unless-stopped
+    command: ["bench", "worker", "--queue", "short,default"]
+    volumes:
+      - fertility-sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+
+  queue-long:
+    <<: [*backend-image, *backend-env]
+    restart: unless-stopped
+    command: ["bench", "worker", "--queue", "long,default"]
+    volumes:
+      - fertility-sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+
+volumes:
+  fertility-mariadb-data:
+  fertility-redis-cache-data:
+  fertility-redis-queue-data:
+  fertility-sites:

@@ -1,0 +1,92 @@
+[
+ {
+  "doctype": "Workflow",
+  "name": "Fertility Case Workflow",
+  "workflow_name": "Fertility Case Workflow",
+  "document_type": "Fertility Case",
+  "is_active": 1,
+  "send_email_alert": 0,
+  "workflow_state_field": "status",
+  "states": [
+   {"state": "Draft", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Assessment", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Treatment", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "IVF Active", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Pregnant", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Closed", "doc_status": "0", "allow_edit": "Clinic Manager"},
+   {"state": "Cancelled", "doc_status": "0", "allow_edit": "Clinic Manager"}
+  ],
+  "transitions": [
+   {"state": "Draft", "action": "Start Assessment", "next_state": "Assessment", "allowed": "Fertility Doctor"},
+   {"state": "Assessment", "action": "Start Treatment", "next_state": "Treatment", "allowed": "Fertility Doctor"},
+   {"state": "Treatment", "action": "Start IVF", "next_state": "IVF Active", "allowed": "Fertility Doctor"},
+   {"state": "IVF Active", "action": "Confirm Pregnancy", "next_state": "Pregnant", "allowed": "Fertility Doctor"},
+   {"state": "Pregnant", "action": "Close Case", "next_state": "Closed", "allowed": "Clinic Manager"},
+   {"state": "Draft", "action": "Cancel", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "Assessment", "action": "Cancel", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "Treatment", "action": "Cancel", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "IVF Active", "action": "Cancel", "next_state": "Cancelled", "allowed": "Clinic Manager"}
+  ]
+ },
+ {
+  "doctype": "Workflow",
+  "name": "Treatment Plan Workflow",
+  "workflow_name": "Treatment Plan Workflow",
+  "document_type": "Treatment Plan",
+  "is_active": 1,
+  "send_email_alert": 0,
+  "workflow_state_field": "status",
+  "states": [
+   {"state": "Draft", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Review", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Approved", "doc_status": "0", "allow_edit": "Clinic Manager"},
+   {"state": "Active", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Completed", "doc_status": "0", "allow_edit": "Fertility Doctor"}
+  ],
+  "transitions": [
+   {"state": "Draft", "action": "Submit for Review", "next_state": "Review", "allowed": "Fertility Doctor"},
+   {"state": "Review", "action": "Approve", "next_state": "Approved", "allowed": "Clinic Manager"},
+   {"state": "Review", "action": "Reject", "next_state": "Draft", "allowed": "Clinic Manager"},
+   {"state": "Approved", "action": "Activate", "next_state": "Active", "allowed": "Fertility Doctor"},
+   {"state": "Active", "action": "Complete", "next_state": "Completed", "allowed": "Fertility Doctor"}
+  ]
+ },
+ {
+  "doctype": "Workflow",
+  "name": "IVF Cycle Workflow",
+  "workflow_name": "IVF Cycle Workflow",
+  "document_type": "IVF Cycle",
+  "is_active": 1,
+  "send_email_alert": 0,
+  "workflow_state_field": "status",
+  "states": [
+   {"state": "Planned", "doc_status": "0", "allow_edit": "IVF Coordinator"},
+   {"state": "Stimulation", "doc_status": "0", "allow_edit": "IVF Coordinator"},
+   {"state": "Monitoring", "doc_status": "0", "allow_edit": "IVF Coordinator"},
+   {"state": "Trigger", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Retrieval", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Fertilization", "doc_status": "0", "allow_edit": "Embryologist"},
+   {"state": "Embryology", "doc_status": "0", "allow_edit": "Embryologist"},
+   {"state": "Transfer", "doc_status": "0", "allow_edit": "Fertility Doctor"},
+   {"state": "Pregnancy Test", "doc_status": "0", "allow_edit": "IVF Coordinator"},
+   {"state": "Completed", "doc_status": "0", "allow_edit": "IVF Coordinator"},
+   {"state": "Cancelled", "doc_status": "0", "allow_edit": "Clinic Manager"}
+  ],
+  "transitions": [
+   {"state": "Planned", "action": "Start Stimulation", "next_state": "Stimulation", "allowed": "IVF Coordinator"},
+   {"state": "Stimulation", "action": "Begin Monitoring", "next_state": "Monitoring", "allowed": "IVF Coordinator"},
+   {"state": "Monitoring", "action": "Trigger Ovulation", "next_state": "Trigger", "allowed": "Fertility Doctor"},
+   {"state": "Trigger", "action": "Perform Retrieval", "next_state": "Retrieval", "allowed": "Fertility Doctor"},
+   {"state": "Retrieval", "action": "Fertilize", "next_state": "Fertilization", "allowed": "Embryologist"},
+   {"state": "Fertilization", "action": "Proceed to Embryology", "next_state": "Embryology", "allowed": "Embryologist"},
+   {"state": "Embryology", "action": "Schedule Transfer", "next_state": "Transfer", "allowed": "Fertility Doctor"},
+   {"state": "Transfer", "action": "Await Pregnancy Test", "next_state": "Pregnancy Test", "allowed": "IVF Coordinator"},
+   {"state": "Pregnancy Test", "action": "Complete Cycle", "next_state": "Completed", "allowed": "IVF Coordinator"},
+   {"state": "Planned", "action": "Cancel Cycle", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "Stimulation", "action": "Cancel Cycle", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "Monitoring", "action": "Cancel Cycle", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "Trigger", "action": "Cancel Cycle", "next_state": "Cancelled", "allowed": "Clinic Manager"},
+   {"state": "Retrieval", "action": "Cancel Cycle", "next_state": "Cancelled", "allowed": "Clinic Manager"}
+  ]
+ }
+]

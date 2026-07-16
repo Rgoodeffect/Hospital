@@ -1,0 +1,146 @@
+{
+ "actions": [],
+ "autoname": "field:tank_id",
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tank_id",
+  "location",
+  "status",
+  "column_break_1",
+  "capacity",
+  "current_usage",
+  "occupancy_percent",
+  "section_break_nitrogen",
+  "nitrogen_level",
+  "column_break_nitrogen",
+  "nitrogen_threshold",
+  "occupancy_alert_threshold"
+ ],
+ "fields": [
+  {
+   "fieldname": "tank_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tank ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Physical Location"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nMaintenance\nDecommissioned"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Capacity (Straws)",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "current_usage",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Current Usage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "occupancy_percent",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Occupancy %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_nitrogen",
+   "fieldtype": "Section Break",
+   "label": "Liquid Nitrogen Monitoring"
+  },
+  {
+   "fieldname": "nitrogen_level",
+   "fieldtype": "Percent",
+   "label": "Nitrogen Level"
+  },
+  {
+   "fieldname": "column_break_nitrogen",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "20",
+   "fieldname": "nitrogen_threshold",
+   "fieldtype": "Percent",
+   "label": "Nitrogen Alert Threshold"
+  },
+  {
+   "default": "90",
+   "fieldname": "occupancy_alert_threshold",
+   "fieldtype": "Percent",
+   "label": "Occupancy Alert Threshold"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Storage Tank Management",
+ "name": "Storage Tank",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Embryologist",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Clinic Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

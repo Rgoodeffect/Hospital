@@ -1,0 +1,38 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"exec-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Executive Workspace</b></span>\",\"col\":12}},{\"id\":\"exec-sc-1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Executive KPI Dashboard\",\"col\":3}},{\"id\":\"exec-sc-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Doctor Performance\",\"col\":3}},{\"id\":\"exec-sc-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Embryologist Performance\",\"col\":3}},{\"id\":\"exec-sc-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pregnancy Outcomes\",\"col\":3}},{\"id\":\"exec-sc-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"KPI Snapshot\",\"col\":3}},{\"id\":\"exec-sc-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Executive Dashboard Snapshot\",\"col\":3}}]",
+ "creation": "2026-01-01 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "graph",
+ "idx": 1,
+ "is_hidden": 0,
+ "label": "Executive",
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Executive Dashboards",
+ "name": "Executive",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [
+  {"role": "Clinic Manager"},
+  {"role": "System Manager"}
+ ],
+ "sequence_id": 5.0,
+ "shortcuts": [
+  {"label": "Executive KPI Dashboard", "link_to": "Executive KPI Dashboard", "type": "Report", "doc_view": ""},
+  {"label": "Doctor Performance", "link_to": "Doctor Performance", "type": "Report", "doc_view": ""},
+  {"label": "Embryologist Performance", "link_to": "Embryologist Performance", "type": "Report", "doc_view": ""},
+  {"label": "Pregnancy Outcomes", "link_to": "Pregnancy Outcomes", "type": "Report", "doc_view": ""},
+  {"label": "KPI Snapshot", "link_to": "KPI Snapshot", "type": "DocType", "doc_view": "List"},
+  {"label": "Executive Dashboard Snapshot", "link_to": "Executive Dashboard Snapshot", "type": "DocType", "doc_view": "List"}
+ ],
+ "title": "Executive"
+}

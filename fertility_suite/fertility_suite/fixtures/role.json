@@ -1,0 +1,37 @@
+[
+ {
+  "doctype": "Role",
+  "role_name": "Fertility Doctor",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Embryologist",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "IVF Coordinator",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Fertility Nurse",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Insurance Officer",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Clinic Manager",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Fertility Patient",
+  "desk_access": 0
+ }
+]
