@@ -1,0 +1,248 @@
+{
+ "actions": [],
+ "autoname": "DONOR-.YYYY.-.#####",
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "donor_type",
+  "donor_code",
+  "anonymous",
+  "status",
+  "registered_on",
+  "column_break_1",
+  "blood_group",
+  "date_of_birth",
+  "ethnicity",
+  "section_break_physical",
+  "height_cm",
+  "weight_kg",
+  "eye_color",
+  "column_break_physical",
+  "hair_color",
+  "education_level",
+  "occupation",
+  "section_break_medical",
+  "medical_history",
+  "section_break_eligibility",
+  "screening_status",
+  "last_screening_date",
+  "column_break_eligibility",
+  "consent_on_file",
+  "section_break_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "donor_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Donor Type",
+   "options": "Egg\nSperm\nEmbryo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "donor_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Donor Code",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "anonymous",
+   "fieldtype": "Check",
+   "label": "Anonymous Donor"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive\nDisqualified\nWithdrawn\nDepleted",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "registered_on",
+   "fieldtype": "Date",
+   "label": "Registered On"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "blood_group",
+   "fieldtype": "Select",
+   "label": "Blood Group",
+   "options": "\nA+\nA-\nB+\nB-\nAB+\nAB-\nO+\nO-"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "ethnicity",
+   "fieldtype": "Data",
+   "label": "Ethnicity"
+  },
+  {
+   "fieldname": "section_break_physical",
+   "fieldtype": "Section Break",
+   "label": "Physical Characteristics"
+  },
+  {
+   "fieldname": "height_cm",
+   "fieldtype": "Float",
+   "label": "Height (cm)"
+  },
+  {
+   "fieldname": "weight_kg",
+   "fieldtype": "Float",
+   "label": "Weight (kg)"
+  },
+  {
+   "fieldname": "eye_color",
+   "fieldtype": "Data",
+   "label": "Eye Color"
+  },
+  {
+   "fieldname": "column_break_physical",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hair_color",
+   "fieldtype": "Data",
+   "label": "Hair Color"
+  },
+  {
+   "fieldname": "education_level",
+   "fieldtype": "Data",
+   "label": "Education Level"
+  },
+  {
+   "fieldname": "occupation",
+   "fieldtype": "Data",
+   "label": "Occupation"
+  },
+  {
+   "fieldname": "section_break_medical",
+   "fieldtype": "Section Break",
+   "label": "Medical History"
+  },
+  {
+   "fieldname": "medical_history",
+   "fieldtype": "Text Editor",
+   "label": "Medical History"
+  },
+  {
+   "fieldname": "section_break_eligibility",
+   "fieldtype": "Section Break",
+   "label": "Eligibility"
+  },
+  {
+   "default": "Not Screened",
+   "fieldname": "screening_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Screening Status",
+   "options": "Not Screened\nPassed\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_screening_date",
+   "fieldtype": "Date",
+   "label": "Last Screening Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_eligibility",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "consent_on_file",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active Consent On File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Embryo Bank",
+ "name": "Gamete Donor",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Embryologist",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fertility Doctor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Clinic Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

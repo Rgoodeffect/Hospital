@@ -12,6 +12,10 @@ def recompute_canister_usage(canister_name, save=True, doc=None):
 		"Embryo Inventory",
 		{"canister": canister_name, "status": ["in", ["Frozen", "Stored"]]},
 	)
+	usage += frappe.db.count(
+		"Donor Bank Unit",
+		{"canister": canister_name, "status": ["in", ["Available", "Reserved", "Allocated"]]},
+	)
 
 	if doc is None:
 		doc = frappe.get_doc("Storage Canister", canister_name)

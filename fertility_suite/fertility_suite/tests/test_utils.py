@@ -131,3 +131,74 @@ def create_test_embryo(embryology_record=None, status="Frozen", tank=None, canis
 		"position": position if tank else None,
 	}).insert(ignore_permissions=True)
 	return embryo
+
+
+def create_test_gamete_donor(donor_type="Egg", screened=False, consented=False):
+	donor = frappe.get_doc({
+		"doctype": "Gamete Donor",
+		"donor_type": donor_type,
+		"blood_group": "O+",
+	}).insert(ignore_permissions=True)
+
+	if screened:
+		create_test_donor_screening(donor=donor, result="Passed")
+	if consented:
+		create_test_donor_consent(donor=donor, consent_type="Donation for Treatment")
+
+	donor.reload()
+	return donor
+
+
+def create_test_donor_screening(donor=None, result="Passed", do_submit=True):
+	donor = donor or create_test_gamete_donor()
+	screening = frappe.get_doc({
+		"doctype": "Donor Screening",
+		"donor": donor.name,
+		"screening_type": "Infectious Disease Panel",
+		"result": result,
+	}).insert(ignore_permissions=True)
+	if do_submit and result != "Pending":
+		screening.submit()
+	return screening
+
+
+def create_test_donor_consent(donor=None, consent_type="Donation for Treatment", do_submit=True):
+	donor = donor or create_test_gamete_donor()
+	consent = frappe.get_doc({
+		"doctype": "Donor Consent",
+		"donor": donor.name,
+		"consent_type": consent_type,
+	}).insert(ignore_permissions=True)
+	if do_submit:
+		consent.submit()
+	return consent
+
+
+def create_test_donor_bank_unit(donor=None, status="Pending QC", tank=None, canister=None,
+                                 straw_number=None, position=None, quantity=1):
+	donor = donor or create_test_gamete_donor(screened=True, consented=True)
+	unit = frappe.get_doc({
+		"doctype": "Donor Bank Unit",
+		"donor": donor.name,
+		"quantity": quantity,
+		"status": status,
+		"tank": tank,
+		"canister": canister,
+		"straw_number": straw_number if tank else None,
+		"position": position if tank else None,
+	}).insert(ignore_permissions=True)
+	return unit
+
+
+def create_test_donor_allocation(unit=None, patient=None, status="Reserved", consent_confirmed=1, do_submit=True):
+	unit = unit or create_test_donor_bank_unit(status="Available")
+	allocation = frappe.get_doc({
+		"doctype": "Donor Allocation",
+		"donor_bank_unit": unit.name,
+		"recipient_patient": patient.name if hasattr(patient, "name") else patient,
+		"status": status,
+		"consent_confirmed": consent_confirmed,
+	}).insert(ignore_permissions=True)
+	if do_submit:
+		allocation.submit()
+	return allocation

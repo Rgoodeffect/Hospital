@@ -15,6 +15,7 @@ fertility_suite/fertility_suite/
   egg_retrieval/                Egg Retrieval
   embryology_management/       Embryology Record
   embryo_inventory/             Embryo Inventory, Embryo Status Log (child)
+  embryo_bank/                  Gamete Donor, Donor Screening, Donor Consent, Donor Bank Unit, Donor Allocation
   storage_tank_management/     Storage Tank, Storage Canister
   embryo_transfer/              Embryo Transfer, Embryo Transfer Item (child)
   pregnancy_follow_up/          Pregnancy Follow Up
@@ -55,6 +56,10 @@ fertility_suite/fertility_suite/
 | No duplicate Tank/Canister/Straw/Position while occupied | `embryo_inventory/doctype/embryo_inventory/embryo_inventory.py::validate_inventory` |
 | Embryo Inventory audit trail | `embryo_inventory/doctype/embryo_inventory/embryo_inventory.py::_record_status_transition` (writes to the `status_history` child table on every status change; combined with `track_changes=1` for full field-level Version history) |
 | No transferring the same embryo twice | `embryo_transfer/doctype/embryo_transfer/embryo_transfer.py::before_submit` |
+| Donor eligibility gate (screening passed + active consent + Active status) before a Donor Bank Unit can be made Available | `embryo_bank/doctype/donor_bank_unit/donor_bank_unit.py::validate_eligibility` |
+| No duplicate Tank/Canister/Straw/Position for donor units (shares the same physical tanks as Embryo Inventory) | `embryo_bank/doctype/donor_bank_unit/donor_bank_unit.py::validate_unit`; occupancy is folded into `storage_tank.py::recompute_tank_usage` / `storage_canister.py::recompute_canister_usage` |
+| A failed Donor Screening disqualifies the donor; a Withdrawal of Consent withdraws them and deactivates prior consents | `embryo_bank/doctype/gamete_donor/gamete_donor.py::recompute_screening_status` / `recompute_consent_status`, `embryo_bank/doctype/donor_consent/donor_consent.py::_withdraw_donor` |
+| A Donor Allocation can only submit against an Available unit; cancelling one frees the unit again | `embryo_bank/doctype/donor_allocation/donor_allocation.py::before_submit` / `on_cancel` |
 | Storage occupancy / nitrogen alerts | `storage_tank_management/doctype/storage_tank/storage_tank.py::check_alerts` (on save) + `check_all_tank_alerts` (hourly cron) |
 | Insurance claim amount calculation | `insurance_management/doctype/insurance_claim/insurance_claim.py::calculate_claim` |
 | KPI computation | `analytics_and_kpi_engine/kpi_engine.py` |

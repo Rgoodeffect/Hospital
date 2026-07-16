@@ -73,6 +73,22 @@ DEFAULT_TEMPLATES = [
 		"subject": "Storage Tank {{ tank_id }} needs attention",
 		"message": "Tank {{ tank_id }} has triggered an alert: {{ alert_reason }}.",
 	},
+	{
+		"name": "Donor Screening Failed",
+		"template_name": "Donor Screening Failed",
+		"event": "Donor Screening Failed",
+		"channels": "Email\nSystem Notification",
+		"subject": "Donor {{ donor }} failed screening",
+		"message": "Donor {{ donor }} failed its {{ screening_type }} screening and has been marked Disqualified.",
+	},
+	{
+		"name": "Donor Unit Allocated",
+		"template_name": "Donor Unit Allocated",
+		"event": "Donor Unit Allocated",
+		"channels": "Email\nSystem Notification",
+		"subject": "Donor Bank Unit {{ donor_bank_unit }} allocated",
+		"message": "Donor Bank Unit {{ donor_bank_unit }} has been allocated to recipient {{ recipient_patient }}.",
+	},
 ]
 
 

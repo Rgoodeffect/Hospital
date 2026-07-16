@@ -37,7 +37,7 @@ def get_data():
 			"color": "#009688",
 			"icon": "octicon octicon-database",
 			"type": "module",
-			"description": "Embryo inventory and cryogenic storage management.",
+			"description": "Donor gamete/embryo registry, screening, consent and recipient allocation.",
 		},
 		{
 			"module_name": "Insurance Management",

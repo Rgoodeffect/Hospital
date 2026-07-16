@@ -22,6 +22,10 @@ def recompute_tank_usage(tank_name, save=True):
 		"Embryo Inventory",
 		{"tank": tank_name, "status": ["in", ["Frozen", "Stored"]]},
 	)
+	usage += frappe.db.count(
+		"Donor Bank Unit",
+		{"tank": tank_name, "status": ["in", ["Available", "Reserved", "Allocated"]]},
+	)
 	tank = frappe.get_doc("Storage Tank", tank_name)
 	occupancy = (usage / tank.capacity * 100) if tank.capacity else 0
 

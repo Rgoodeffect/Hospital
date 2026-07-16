@@ -1,0 +1,21 @@
+{
+ "add_total_row": 0,
+ "creation": "2026-01-01 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Embryo Bank",
+ "name": "Available Donor Bank Units",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Donor Bank Unit",
+ "report_name": "Available Donor Bank Units",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "Embryologist"},
+  {"role": "Fertility Doctor"},
+  {"role": "System Manager"}
+ ]
+}
