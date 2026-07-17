@@ -14,8 +14,9 @@ USER frappe
 
 # Get the Healthcare and Fertility Suite apps into the bench image without building
 # frontend assets yet; assets are built later once the site exists.
-RUN bench get-app --skip-assets healthcare https://github.com/frappe/health --branch develop \
-	&& bench get-app --skip-assets fertility_suite https://github.com/rgoodeffect/hospital --branch main
+RUN bench get-app --skip-assets healthcare https://github.com/frappe/health --branch version-16 \
+	&& bench get-app --skip-assets fertility_suite https://github.com/rgoodeffect/hospital --branch main \
+	&& bench setup procfile
 
 EXPOSE 8000 9000 6787
 

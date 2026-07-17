@@ -34,7 +34,7 @@ requirements.
 cd frappe-bench
 
 # Healthcare is a prerequisite - install it first if you haven't already
-bench get-app healthcare https://github.com/frappe/health --branch develop
+bench get-app healthcare https://github.com/frappe/health --branch version-16
 bench --site your-site.local install-app healthcare
 
 # Fertility Suite

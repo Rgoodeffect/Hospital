@@ -58,9 +58,13 @@ services:
         export APP_LIST="erpnext healthcare fertility_suite";
         if [ ! -d "sites/${SITE_NAME:-fertility.local}" ]; then
           bench new-site "${SITE_NAME:-fertility.local}" \
+            --db-host "$$MARIADB_HOST" \
             --mariadb-root-password "${DB_ROOT_PASSWORD:-changeit}" \
             --admin-password "${ADMIN_PASSWORD:-changeit}" \
             --no-mariadb-socket;
+          bench --site "${SITE_NAME:-fertility.local}" set-config redis_cache "$$REDIS_CACHE";
+          bench --site "${SITE_NAME:-fertility.local}" set-config redis_queue "$$REDIS_QUEUE";
+          bench --site "${SITE_NAME:-fertility.local}" set-config redis_socketio "$$REDIS_SOCKETIO";
           for app in $$APP_LIST; do bench --site "${SITE_NAME:-fertility.local}" install-app $$app; done;
         fi;
     depends_on:

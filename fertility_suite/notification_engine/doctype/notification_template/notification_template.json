@@ -30,7 +30,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Event",
-   "options": "Appointment Reminder\nLab Result Ready\nClaim Approved\nCycle Started\nEmbryo Transfer Scheduled\nPregnancy Test Reminder\nStorage Tank Alert",
+   "options": "Appointment Reminder\nLab Result Ready\nClaim Approved\nCycle Started\nEmbryo Transfer Scheduled\nPregnancy Test Reminder\nStorage Tank Alert\nDonor Screening Failed\nDonor Unit Allocated",
    "reqd": 1
   },
   {
