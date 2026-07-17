@@ -25,8 +25,11 @@ class TestFertilityCase(FrappeTestCase):
 
 		self.assertRaises(frappe.ValidationError, second_case.insert, ignore_permissions=True)
 
-		first_case.status = "Closed"
-		first_case.save(ignore_permissions=True)
+		# Fertility Case Workflow only allows transitioning to Closed from
+		# Pregnant; jump the status directly the same way the app's own
+		# business logic does elsewhere, bypassing the workflow's transition
+		# graph for test setup.
+		frappe.db.set_value("Fertility Case", first_case.name, "status", "Closed")
 
 		# now that the first case is closed, a new active case should be allowed
 		second_case.insert(ignore_permissions=True)
@@ -39,8 +42,9 @@ class TestFertilityCase(FrappeTestCase):
 			"doctype": "Fertility Case",
 			"patient": patient,
 			"doctor": doctor,
-			"status": "Cancelled",
+			"status": "Draft",
 		}).insert(ignore_permissions=True)
+		frappe.db.set_value("Fertility Case", closed_case.name, "status", "Cancelled")
 		self.assertTrue(closed_case.name)
 
 		new_case = frappe.get_doc({

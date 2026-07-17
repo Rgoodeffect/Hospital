@@ -23,8 +23,11 @@ class TestIVFCycle(FrappeTestCase):
 		})
 		self.assertRaises(frappe.ValidationError, second_cycle.insert, ignore_permissions=True)
 
-		first_cycle.status = "Completed"
-		first_cycle.save(ignore_permissions=True)
+		# IVF Cycle Workflow doesn't allow a direct Planned -> Completed
+		# transition; jump the status directly the same way the app's own
+		# business logic does elsewhere, bypassing the workflow's transition
+		# graph for test setup.
+		frappe.db.set_value("IVF Cycle", first_cycle.name, "status", "Completed")
 
 		second_cycle.insert(ignore_permissions=True)
 		self.assertTrue(second_cycle.name)

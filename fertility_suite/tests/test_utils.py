@@ -47,8 +47,17 @@ def create_test_ivf_cycle(case=None, status="Planned"):
 		"doctype": "IVF Cycle",
 		"fertility_case": case.name,
 		"doctor": case.doctor,
-		"status": status,
+		"status": "Planned",
 	}).insert(ignore_permissions=True)
+
+	if status != "Planned":
+		# IVF Cycle Workflow only allows inserting in its first state (Planned);
+		# jump straight to a later state the same way the app's own business
+		# logic does (e.g. pregnancy_follow_up.py), bypassing the workflow's
+		# transition graph for test setup.
+		frappe.db.set_value("IVF Cycle", cycle.name, "status", status)
+		cycle.reload()
+
 	return cycle
 
 
