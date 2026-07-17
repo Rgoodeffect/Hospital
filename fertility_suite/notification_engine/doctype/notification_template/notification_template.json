@@ -44,10 +44,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "One channel per line: Email, SMS, WhatsApp, System Notification, Push Notification",
    "fieldname": "channels",
-   "fieldtype": "MultiSelectPills",
+   "fieldtype": "Small Text",
    "label": "Channels",
-   "options": "Email\nSMS\nWhatsApp\nSystem Notification\nPush Notification",
    "reqd": 1
   },
   {
