@@ -71,7 +71,6 @@ services:
           for app in $$APP_LIST; do bench --site "${SITE_NAME:-fertility.local}" install-app $$app; done;
         fi;
         bench build --app fertility_suite;
-        ln -sfn /home/frappe/frappe-bench/apps/fertility_suite/fertility_suite/public /home/frappe/frappe-bench/assets/fertility_suite;
     depends_on:
       - mariadb
       - redis-cache

@@ -9,6 +9,8 @@ USER root
 WORKDIR /home/frappe/frappe-bench
 
 COPY apps.json /home/frappe/frappe-bench/apps.json
+COPY docker-entrypoint-wrapper.sh /usr/local/bin/docker-entrypoint-wrapper.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint-wrapper.sh
 
 USER frappe
 
@@ -25,4 +27,5 @@ RUN bench get-app --skip-assets healthcare https://github.com/frappe/health --br
 
 EXPOSE 8000 9000 6787
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint-wrapper.sh"]
 CMD ["bench", "start"]
