@@ -36,7 +36,8 @@ def get_permission_query_conditions(user):
 	if not user:
 		user = frappe.session.user
 
-	if "Fertility Patient" not in frappe.get_roles(user):
+	roles = frappe.get_roles(user)
+	if "Fertility Patient" not in roles or "System Manager" in roles:
 		return ""
 
 	patient = frappe.db.get_value("Patient", {"user_id": user}, "name")
@@ -50,7 +51,8 @@ def has_permission(doc, user):
 	if not user:
 		user = frappe.session.user
 
-	if "Fertility Patient" not in frappe.get_roles(user):
+	roles = frappe.get_roles(user)
+	if "Fertility Patient" not in roles or "System Manager" in roles:
 		return True
 
 	patient = frappe.db.get_value("Patient", {"user_id": user}, "name")
