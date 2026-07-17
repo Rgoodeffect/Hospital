@@ -201,3 +201,294 @@
    11. Responsive - Frappe already collapses its own sidebar/topbar below
    its own breakpoints; nothing further required here.
 --------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------
+   12. Permanent left navigation rail (fertility_sidebar.js)
+   A fixed, always-visible nav independent of Frappe's own per-page
+   workspace sidebar, matching the demo prototype's persistent rail.
+   Injected as a sibling of .main-section directly under <body>, so it is
+   never touched by the SPA router.
+--------------------------------------------------------------------------- */
+:root {
+	--fs-sidebar-width: 236px;
+	--fs-sidebar-width-collapsed: 68px;
+	--fs-sidebar-bg: #171335;
+	--fs-sidebar-bg-active: rgba(124, 92, 255, 0.22);
+	--fs-sidebar-text: #c3c6e8;
+	--fs-sidebar-text-active: #ffffff;
+}
+
+#fertility-sidebar {
+	position: fixed;
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	width: var(--fs-sidebar-width);
+	background: var(--fs-sidebar-bg);
+	display: flex;
+	flex-direction: column;
+	z-index: 1030;
+	overflow-y: auto;
+	overflow-x: hidden;
+	transition: width 0.18s ease;
+}
+
+/* Frappe's own persistent app sidebar (.body-sidebar-container, z-index
+   1020) would otherwise occupy the same rail - our fixed nav replaces it
+   rather than stacking alongside it. */
+body.fs-sidebar-active .body-sidebar-container {
+	display: none !important;
+}
+
+body.fs-sidebar-active .main-section {
+	margin-inline-start: var(--fs-sidebar-width);
+	width: calc(100% - var(--fs-sidebar-width));
+	transition: margin 0.18s ease, width 0.18s ease;
+}
+
+body.fs-sidebar-collapsed #fertility-sidebar {
+	width: var(--fs-sidebar-width-collapsed);
+}
+body.fs-sidebar-collapsed.fs-sidebar-active .main-section {
+	margin-inline-start: var(--fs-sidebar-width-collapsed);
+	width: calc(100% - var(--fs-sidebar-width-collapsed));
+}
+body.fs-sidebar-collapsed .fs-sidebar-label,
+body.fs-sidebar-collapsed .fs-sidebar-brand-text {
+	display: none;
+}
+
+.fs-sidebar-brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 18px 16px;
+	flex-shrink: 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.fs-sidebar-brand-mark {
+	width: 34px;
+	height: 34px;
+	border-radius: 10px;
+	background: var(--fertility-brand, #7c5cff);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 800;
+	font-size: 0.8rem;
+	flex-shrink: 0;
+}
+.fs-sidebar-brand-text {
+	color: #fff;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.fs-sidebar-nav {
+	flex: 1 1 auto;
+	padding: 10px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.fs-sidebar-link {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 12px;
+	border-radius: 10px;
+	color: var(--fs-sidebar-text);
+	text-decoration: none;
+	white-space: nowrap;
+	font-size: 0.86rem;
+	font-weight: 500;
+}
+.fs-sidebar-link:hover {
+	background: rgba(124, 92, 255, 0.12);
+	color: #fff;
+	text-decoration: none;
+}
+.fs-sidebar-link.fs-active {
+	background: var(--fs-sidebar-bg-active);
+	color: var(--fs-sidebar-text-active);
+	font-weight: 700;
+}
+
+.fs-sidebar-icon {
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	stroke: currentColor;
+	fill: none;
+}
+
+.fs-sidebar-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin: 8px;
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.06);
+	color: var(--fs-sidebar-text);
+	cursor: pointer;
+	flex-shrink: 0;
+}
+.fs-sidebar-toggle:hover {
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+}
+body.fs-sidebar-collapsed .fs-sidebar-toggle .fs-sidebar-icon {
+	transform: rotate(180deg);
+}
+
+@media (max-width: 900px) {
+	#fertility-sidebar {
+		width: var(--fs-sidebar-width-collapsed);
+	}
+	body.fs-sidebar-active .main-section {
+		margin-inline-start: var(--fs-sidebar-width-collapsed);
+		width: calc(100% - var(--fs-sidebar-width-collapsed));
+	}
+	body.fs-sidebar-active:not(.fs-sidebar-collapsed) #fertility-sidebar {
+		width: var(--fs-sidebar-width);
+	}
+	body.fs-sidebar-active:not(.fs-sidebar-collapsed) .main-section {
+		margin-inline-start: var(--fs-sidebar-width);
+		width: calc(100% - var(--fs-sidebar-width));
+	}
+	.fs-sidebar-label,
+	.fs-sidebar-brand-text {
+		display: none;
+	}
+	body.fs-sidebar-active:not(.fs-sidebar-collapsed) .fs-sidebar-label,
+	body.fs-sidebar-active:not(.fs-sidebar-collapsed) .fs-sidebar-brand-text {
+		display: inline;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   13. Fertility Command Center - KPI cards & dashboard grid
+   (fertility_dashboard.js). Rounded, elevated, medical-palette cards
+   matching design-system.md's .kpi-card, reproduced with our own markup
+   rather than Frappe's Number Card widget.
+--------------------------------------------------------------------------- */
+.fertility-command-center {
+	padding: 4px 4px 32px;
+}
+
+.fs-dashboard-hero {
+	margin-bottom: 20px;
+}
+.fs-dashboard-hero h2 {
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin-bottom: 4px;
+}
+
+.fs-kpi-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.fs-kpi-card {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	background: var(--card-bg, #fff);
+	border: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+	border-radius: 18px;
+	padding: 20px;
+	box-shadow: 0 2px 10px rgba(31, 35, 75, 0.06);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+[data-theme="dark"] .fs-kpi-card {
+	box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+.fs-kpi-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 30px rgba(31, 35, 75, 0.12);
+}
+
+.fs-kpi-icon-wrap {
+	width: 48px;
+	height: 48px;
+	border-radius: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+.fs-kpi-icon-wrap .fs-kpi-icon {
+	width: 24px;
+	height: 24px;
+	stroke: currentColor;
+	fill: none;
+}
+
+.fs-kpi-value {
+	font-size: 1.6rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+}
+.fs-kpi-label {
+	font-size: 0.78rem;
+	color: var(--text-muted, #8d99a6);
+	margin-top: 2px;
+}
+
+.fs-color-brand .fs-kpi-icon-wrap { background: rgba(124, 92, 255, 0.14); color: #7c5cff; }
+.fs-color-blue .fs-kpi-icon-wrap { background: rgba(47, 155, 255, 0.14); color: #2f9bff; }
+.fs-color-teal .fs-kpi-icon-wrap { background: rgba(0, 184, 169, 0.14); color: #00b8a9; }
+.fs-color-rose .fs-kpi-icon-wrap { background: rgba(255, 92, 138, 0.14); color: #ff5c8a; }
+.fs-color-amber .fs-kpi-icon-wrap { background: rgba(255, 166, 43, 0.16); color: #d0791a; }
+.fs-color-green .fs-kpi-icon-wrap { background: rgba(18, 183, 106, 0.14); color: #12b76a; }
+
+.fs-color-brand .fs-kpi-value { color: #7c5cff; }
+.fs-color-blue .fs-kpi-value { color: #2f9bff; }
+.fs-color-teal .fs-kpi-value { color: #00b8a9; }
+.fs-color-rose .fs-kpi-value { color: #ff5c8a; }
+.fs-color-amber .fs-kpi-value { color: #d0791a; }
+.fs-color-green .fs-kpi-value { color: #12b76a; }
+
+/* ---------------------------------------------------------------------------
+   14. Fertility Command Center - Chart.js cards
+--------------------------------------------------------------------------- */
+.fs-chart-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+	gap: 16px;
+}
+
+.fs-chart-card {
+	background: var(--card-bg, #fff);
+	border: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+	border-radius: 18px;
+	padding: 18px 20px 20px;
+	box-shadow: 0 2px 10px rgba(31, 35, 75, 0.06);
+}
+[data-theme="dark"] .fs-chart-card {
+	box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.fs-chart-card-title {
+	font-weight: 700;
+	font-size: 0.92rem;
+	margin-bottom: 12px;
+}
+
+.fs-chart-canvas-wrap {
+	position: relative;
+	height: 260px;
+}
+.fs-chart-canvas-wrap canvas {
+	width: 100% !important;
+	height: 100% !important;
+}

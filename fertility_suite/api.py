@@ -8,6 +8,7 @@ to via the DocType's standard permissions.
 
 import frappe
 from frappe import _
+from frappe.utils import add_days, today
 
 
 def _resolve_patient(patient=None):
@@ -131,3 +132,87 @@ def get_dashboard_kpis(kpi_names: list | None = None):
 			latest[key] = snap
 
 	return list(latest.values())
+
+
+@frappe.whitelist()
+def get_command_center_kpis():
+	"""The six headline KPIs for the Fertility Command Center dashboard."""
+	period_end = today()
+	period_start = add_days(period_end, -90)
+
+	pregnancy_rate = frappe.db.get_value(
+		"KPI Snapshot",
+		{"kpi_name": "Pregnancy Rate", "dimension": ["is", "not set"]},
+		"kpi_value",
+		order_by="creation desc",
+	) or 0
+
+	revenue = frappe.db.sql(
+		"select sum(total_amount) from `tabInsurance Claim` where claim_date between %s and %s",
+		(period_start, period_end),
+	)[0][0] or 0
+
+	return {
+		"total_patients": frappe.db.count("Patient"),
+		"todays_appointments": frappe.db.count("Patient Appointment", {"appointment_date": today()}),
+		"active_ivf_cycles": frappe.db.count("IVF Cycle", {"status": ["not in", ["Completed", "Cancelled"]]}),
+		"pregnancy_rate": pregnancy_rate,
+		"embryos_stored": frappe.db.count("Embryo Inventory", {"status": ["in", ["Frozen", "Stored"]]}),
+		"revenue": revenue,
+	}
+
+
+@frappe.whitelist()
+def get_command_center_charts():
+	"""Chart.js-ready series for the Fertility Command Center dashboard."""
+	period_end = today()
+	period_start = add_days(period_end, -180)
+
+	revenue_rows = frappe.db.sql(
+		"""
+		select date_format(claim_date, '%%Y-%%m') as month, sum(total_amount) as amount
+		from `tabInsurance Claim`
+		where claim_date between %s and %s
+		group by month
+		order by month
+		""",
+		(period_start, period_end),
+		as_dict=True,
+	)
+
+	outcome_rows = frappe.db.sql(
+		"""
+		select outcome, count(*) as n
+		from `tabPregnancy Follow Up`
+		where outcome is not null and outcome != ''
+		group by outcome
+		""",
+		as_dict=True,
+	)
+
+	embryo_rows = frappe.db.sql(
+		"select status, count(*) as n from `tabEmbryo Inventory` group by status", as_dict=True
+	)
+
+	claim_rows = frappe.db.sql(
+		"select status, count(*) as n from `tabInsurance Claim` group by status", as_dict=True
+	)
+
+	return {
+		"revenue_trend": {
+			"labels": [row.month for row in revenue_rows],
+			"values": [float(row.amount or 0) for row in revenue_rows],
+		},
+		"ivf_success_rate": {
+			"labels": [row.outcome for row in outcome_rows],
+			"values": [row.n for row in outcome_rows],
+		},
+		"embryo_inventory": {
+			"labels": [row.status for row in embryo_rows],
+			"values": [row.n for row in embryo_rows],
+		},
+		"claims_status": {
+			"labels": [row.status for row in claim_rows],
+			"values": [row.n for row in claim_rows],
+		},
+	}

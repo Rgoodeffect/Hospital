@@ -22,6 +22,8 @@ app_include_css = [
 app_include_js = [
 	"/assets/fertility_suite/js/fertility_suite.js",
 	"/assets/fertility_suite/js/fertility_ui.js",
+	"/assets/fertility_suite/js/fertility_sidebar.js",
+	"/assets/fertility_suite/js/fertility_dashboard.js",
 ]
 
 # include js, css files in header of web template
@@ -135,3 +137,4 @@ before_tests = "fertility_suite.setup.install.before_tests"
 # App installation
 # -----------------
 after_install = "fertility_suite.setup.install.after_install"
+after_migrate = "fertility_suite.setup.install.set_default_home_page"

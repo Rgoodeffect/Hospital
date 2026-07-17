@@ -14,6 +14,7 @@ FERTILITY_ROLES = [
 def after_install():
 	create_fertility_roles()
 	create_default_notification_templates()
+	set_default_home_page()
 	frappe.db.commit()
 
 
@@ -26,6 +27,13 @@ def before_tests():
 		frappe.db.set_single_value("System Settings", "country", "United Arab Emirates")
 
 	frappe.db.commit()
+
+
+def set_default_home_page():
+	"""Land desk users on the Fertility Command Center instead of the
+	standard ERPNext workspace list, matching the demo prototype where the
+	dashboard is the very first thing you see after logging in."""
+	frappe.db.set_default("desktop:home_page", "fertility-command-center")
 
 
 def create_fertility_roles():
