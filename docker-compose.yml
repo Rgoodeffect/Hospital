@@ -56,6 +56,9 @@ services:
         wait-for-it -t 120 redis-cache:6379;
         wait-for-it -t 120 redis-queue:6379;
         export APP_LIST="erpnext healthcare fertility_suite";
+        bench set-config -g redis_cache "$$REDIS_CACHE";
+        bench set-config -g redis_queue "$$REDIS_QUEUE";
+        bench set-config -g redis_socketio "$$REDIS_SOCKETIO";
         if [ ! -d "sites/${SITE_NAME:-fertility.local}" ]; then
           bench new-site "${SITE_NAME:-fertility.local}" \
             --db-host "$$MARIADB_HOST" \
@@ -77,6 +80,10 @@ services:
   backend:
     <<: [*backend-image, *backend-env]
     restart: unless-stopped
+    # Only the web process - redis, the scheduler, workers and socketio each
+    # have their own dedicated service below and run against the redis-cache/
+    # redis-queue containers, not a locally spawned redis-server.
+    command: ["bench", "serve", "--port", "8000"]
     volumes:
       - fertility-sites:/home/frappe/frappe-bench/sites
     depends_on:
