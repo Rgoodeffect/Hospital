@@ -1,0 +1,104 @@
+/* Patient Portal - themed per docs/design-system.md */
+
+.fertility-portal {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 1rem 0 3rem;
+}
+
+.portal-hero {
+	display: flex;
+	align-items: center;
+	gap: 1.2rem;
+	background: linear-gradient(135deg, #7c5cff, #2f9bff);
+	border-radius: 16px;
+	color: #fff;
+	padding: 1.8rem;
+	margin-bottom: 1.5rem;
+}
+.portal-avatar {
+	width: 64px;
+	height: 64px;
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.18);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.6rem;
+	font-weight: 800;
+	flex-shrink: 0;
+}
+.portal-hero h2 {
+	margin: 0 0 0.2rem;
+	font-weight: 700;
+}
+.portal-hero-sub {
+	margin: 0;
+	opacity: 0.85;
+	font-size: 0.9rem;
+}
+
+.portal-tabs {
+	border-bottom: 1px solid #e7e9f2;
+	margin-bottom: 1.2rem;
+}
+.portal-tabs > li > a {
+	color: #6b7085;
+	font-weight: 600;
+	font-size: 0.9rem;
+	border: none !important;
+	background: transparent !important;
+	padding: 0.6rem 1rem;
+}
+.portal-tabs > li.active > a {
+	color: #7c5cff !important;
+	border-bottom: 2px solid #7c5cff !important;
+}
+
+.portal-card {
+	background: #fff;
+	border: 1px solid #e7e9f2;
+	border-radius: 16px;
+	box-shadow: 0 2px 10px rgba(31, 35, 75, 0.06);
+	padding: 1.2rem;
+	min-height: 160px;
+}
+
+.portal-table thead th {
+	background: #f7f8fc;
+	color: #6b7085;
+	font-size: 0.74rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	font-weight: 700;
+	border-bottom: 1px solid #e7e9f2;
+}
+.portal-table tbody td {
+	font-size: 0.87rem;
+	vertical-align: middle;
+	border-bottom: 1px solid #e7e9f2;
+}
+
+.portal-empty {
+	text-align: center;
+	padding: 2.5rem 1rem;
+}
+
+/* Status badges - same six-bucket palette as the rest of the product */
+.badge-soft {
+	font-weight: 600;
+	font-size: 0.72rem;
+	padding: 0.38rem 0.65rem;
+	border-radius: 20px;
+	background: #edeef2;
+	color: #6b7085;
+}
+.b-active, .b-completed, .b-approved, .b-paid, .b-scheduled { background: #e5f9f1; color: #0e9f6e; }
+.b-pending, .b-planned, .b-underreview, .b-submitted { background: #fef3e0; color: #b9770e; }
+.b-cancelled, .b-rejected, .b-discarded { background: #fde8e8; color: #e02424; }
+.b-frozen, .b-transfer { background: #e8f1ff; color: #2563eb; }
+.b-closed, .b-inactive { background: #edeef2; color: #6b7085; }
+
+@media (max-width: 600px) {
+	.portal-hero { flex-direction: column; text-align: center; }
+}

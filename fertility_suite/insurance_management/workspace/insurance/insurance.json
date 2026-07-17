@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"ins-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Insurance Workspace</b></span>\",\"col\":12}},{\"id\":\"ins-sc-1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Company\",\"col\":3}},{\"id\":\"ins-sc-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Plan\",\"col\":3}},{\"id\":\"ins-sc-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pre Authorization\",\"col\":3}},{\"id\":\"ins-sc-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Claim\",\"col\":3}},{\"id\":\"ins-sc-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Claims Report\",\"col\":3}},{\"id\":\"ins-sc-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Revenue Analysis\",\"col\":3}}]",
+ "content": "[{\"id\":\"ins-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Insurance Workspace</b></span>\",\"col\":12}},{\"id\":\"ins-nc-1\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Pending Insurance Claims\",\"col\":3}},{\"id\":\"ins-sc-1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Company\",\"col\":3}},{\"id\":\"ins-sc-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Plan\",\"col\":3}},{\"id\":\"ins-sc-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pre Authorization\",\"col\":3}},{\"id\":\"ins-sc-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Claim\",\"col\":3}},{\"id\":\"ins-sc-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Insurance Claims Report\",\"col\":3}},{\"id\":\"ins-sc-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Revenue Analysis\",\"col\":3}}]",
  "creation": "2026-01-01 00:00:00.000000",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -15,7 +15,9 @@
  "modified_by": "Administrator",
  "module": "Insurance Management",
  "name": "Insurance",
- "number_cards": [],
+ "number_cards": [
+  {"label": "Pending Insurance Claims", "number_card_name": "Pending Insurance Claims"}
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,

@@ -15,11 +15,20 @@ required_apps = ["frappe", "erpnext", "healthcare"]
 
 # Includes in <head>
 # ------------------
-app_include_css = "/assets/fertility_suite/css/fertility_suite.css"
-app_include_js = "/assets/fertility_suite/js/fertility_suite.js"
+app_include_css = [
+	"/assets/fertility_suite/css/fertility_suite.css",
+	"/assets/fertility_suite/css/fertility_theme.css",
+]
+app_include_js = [
+	"/assets/fertility_suite/js/fertility_suite.js",
+	"/assets/fertility_suite/js/fertility_ui.js",
+]
 
 # include js, css files in header of web template
-web_include_css = "/assets/fertility_suite/css/fertility_suite.css"
+web_include_css = [
+	"/assets/fertility_suite/css/fertility_suite.css",
+	"/assets/fertility_suite/css/fertility_theme.css",
+]
 
 # Doctype Class Overrides not required - we do not modify Healthcare/ERPNext core doctypes.
 
@@ -71,6 +80,17 @@ fixtures = [
 	{"dt": "Workflow State"},
 	{"dt": "Workflow Action Master"},
 	{"dt": "Notification Template"},
+	{"dt": "Number Card", "filters": [["name", "in", [
+		"Active Fertility Cases",
+		"Active IVF Cycles",
+		"Total Embryos",
+		"Frozen Embryos",
+		"Pending Insurance Claims",
+	]]]},
+	{"dt": "Dashboard Chart", "filters": [["name", "in", [
+		"IVF Cycle Stage Distribution",
+		"Embryo Inventory Status",
+	]]]},
 ]
 
 # Website route rules for the Patient Portal

@@ -1,0 +1,32 @@
+[
+ {
+  "doctype": "Dashboard Chart",
+  "name": "IVF Cycle Stage Distribution",
+  "chart_name": "IVF Cycle Stage Distribution",
+  "module": "IVF Cycle Management",
+  "chart_type": "Group By",
+  "document_type": "IVF Cycle",
+  "group_by_type": "Count",
+  "group_by_based_on": "status",
+  "type": "Donut",
+  "timespan": "All Time",
+  "time_interval": "Yearly",
+  "is_public": 1,
+  "filters_json": "[]"
+ },
+ {
+  "doctype": "Dashboard Chart",
+  "name": "Embryo Inventory Status",
+  "chart_name": "Embryo Inventory Status",
+  "module": "Embryo Inventory",
+  "chart_type": "Group By",
+  "document_type": "Embryo Inventory",
+  "group_by_type": "Count",
+  "group_by_based_on": "status",
+  "type": "Donut",
+  "timespan": "All Time",
+  "time_interval": "Yearly",
+  "is_public": 1,
+  "filters_json": "[]"
+ }
+]

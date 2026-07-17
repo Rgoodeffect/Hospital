@@ -1,6 +1,8 @@
 {
- "charts": [],
- "content": "[{\"id\":\"ivf-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>IVF Workspace</b></span>\",\"col\":12}},{\"id\":\"ivf-sc-1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IVF Cycle\",\"col\":3}},{\"id\":\"ivf-sc-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Monitoring Visit\",\"col\":3}},{\"id\":\"ivf-sc-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Egg Retrieval\",\"col\":3}},{\"id\":\"ivf-sc-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Embryo Transfer\",\"col\":3}},{\"id\":\"ivf-sc-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pregnancy Follow Up\",\"col\":3}},{\"id\":\"ivf-sc-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active IVF Cycles\",\"col\":3}}]",
+ "charts": [
+  {"label": "IVF Cycle Stage Distribution", "chart_name": "IVF Cycle Stage Distribution"}
+ ],
+ "content": "[{\"id\":\"ivf-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>IVF Workspace</b></span>\",\"col\":12}},{\"id\":\"ivf-nc-1\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active IVF Cycles\",\"col\":3}},{\"id\":\"ivf-chart-1\",\"type\":\"chart\",\"data\":{\"chart_name\":\"IVF Cycle Stage Distribution\",\"col\":9}},{\"id\":\"ivf-sc-1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IVF Cycle\",\"col\":3}},{\"id\":\"ivf-sc-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Monitoring Visit\",\"col\":3}},{\"id\":\"ivf-sc-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Egg Retrieval\",\"col\":3}},{\"id\":\"ivf-sc-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Embryo Transfer\",\"col\":3}},{\"id\":\"ivf-sc-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pregnancy Follow Up\",\"col\":3}},{\"id\":\"ivf-sc-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active IVF Cycles\",\"col\":3}}]",
  "creation": "2026-01-01 00:00:00.000000",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -15,7 +17,9 @@
  "modified_by": "Administrator",
  "module": "IVF Cycle Management",
  "name": "IVF",
- "number_cards": [],
+ "number_cards": [
+  {"label": "Active IVF Cycles", "number_card_name": "Active IVF Cycles"}
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,

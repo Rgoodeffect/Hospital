@@ -1,23 +1,46 @@
 {% extends "templates/web.html" %}
 
 {% block page_content %}
+{% if not patient %}
+<div class="fertility-portal">
+	<div class="portal-card" style="max-width:480px;margin:3rem auto;text-align:center;">
+		<p>{{ _("Please log in with a patient account to access the Fertility Portal.") }}</p>
+		<a class="btn btn-primary" href="/login?redirect-to=/fertility-portal">{{ _("Log In") }}</a>
+	</div>
+</div>
+{% else %}
 <div class="fertility-portal" id="fertility-portal">
-	<h2>{{ _("Welcome") }}, {{ patient.patient_name }}</h2>
+	<div class="portal-hero">
+		<div class="portal-avatar">{% if patient.patient_name %}{{ patient.patient_name[0]|upper }}{% else %}P{% endif %}</div>
+		<div>
+			<h2>{{ _("Welcome") }}, {{ patient.patient_name }}</h2>
+			<p class="portal-hero-sub">{{ _("Fertility & IVF Suite") }} · {{ _("Patient Portal") }}</p>
+		</div>
+	</div>
 
-	<ul class="nav nav-tabs" id="fertility-portal-tabs">
+	<ul class="nav nav-tabs portal-tabs" id="fertility-portal-tabs">
 		<li class="active"><a data-tab="treatment-plans" href="#">{{ _("Treatment Plans") }}</a></li>
 		<li><a data-tab="ivf-progress" href="#">{{ _("IVF Progress") }}</a></li>
 		<li><a data-tab="embryo-status" href="#">{{ _("Embryo Status") }}</a></li>
 		<li><a data-tab="insurance-claims" href="#">{{ _("Insurance Claims") }}</a></li>
 	</ul>
 
-	<div id="fertility-portal-content" class="fertility-portal-content">
+	<div id="fertility-portal-content" class="fertility-portal-content portal-card">
 		<p class="text-muted">{{ _("Loading...") }}</p>
 	</div>
 </div>
 
 <script>
 frappe.ready(function () {
+	const STATUS_CLASS = {
+		"Active": "b-active", "Completed": "b-completed", "Approved": "b-approved", "Paid": "b-paid",
+		"Scheduled": "b-scheduled", "Pending": "b-pending", "Planned": "b-planned",
+		"Under Review": "b-underreview", "Submitted": "b-submitted",
+		"Cancelled": "b-cancelled", "Rejected": "b-rejected", "Discarded": "b-discarded",
+		"Frozen": "b-frozen", "Stored": "b-frozen", "Transferred": "b-transfer",
+		"Closed": "b-closed", "Inactive": "b-inactive",
+	};
+
 	const endpoints = {
 		"treatment-plans": {
 			method: "fertility_suite.api.get_treatment_plans",
@@ -37,15 +60,22 @@ frappe.ready(function () {
 		},
 	};
 
+	function render_cell(value, column) {
+		if (column === "status" && value && STATUS_CLASS[value]) {
+			return `<span class="badge-soft ${STATUS_CLASS[value]}">${frappe.utils.escape_html(value)}</span>`;
+		}
+		return value != null ? frappe.utils.escape_html(String(value)) : "";
+	}
+
 	function render_table(rows, columns) {
 		if (!rows.length) {
-			return `<p class="text-muted">${__("No records found.")}</p>`;
+			return `<div class="portal-empty"><p class="text-muted">${__("No records found.")}</p></div>`;
 		}
 		let head = columns.map((c) => `<th>${frappe.model.unscrub(c)}</th>`).join("");
 		let body = rows
-			.map((row) => `<tr>${columns.map((c) => `<td>${row[c] != null ? row[c] : ""}</td>`).join("")}</tr>`)
+			.map((row) => `<tr>${columns.map((c) => `<td>${render_cell(row[c], c)}</td>`).join("")}</tr>`)
 			.join("");
-		return `<table class="table table-bordered"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+		return `<div class="table-responsive"><table class="table portal-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
 	}
 
 	function load_tab(tab_name) {
@@ -78,4 +108,5 @@ frappe.ready(function () {
 	load_tab(initial_tab);
 });
 </script>
+{% endif %}
 {% endblock %}
